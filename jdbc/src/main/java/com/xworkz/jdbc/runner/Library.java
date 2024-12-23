@@ -11,7 +11,7 @@ public class Library {
 
             System.out.println("Jdbc found");
 
-            String url = "jdbc:mysql://localhost:3306/?user=root/applicaton";
+            String url = "jdbc:mysql://localhost:3306/applicaton";
 
             String userName = "root";
 
