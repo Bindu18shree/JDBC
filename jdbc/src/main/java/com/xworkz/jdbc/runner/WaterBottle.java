@@ -1,11 +1,10 @@
-package com.xworkz.blinkit.jdbc.runner;
+package com.xworkz.jdbc.runner;
 
 import java.sql.*;
 
-public class Groceries {
+public class WaterBottle {
 
     public static void main(String[] args) {
-
 
         Connection connection = null;
         Statement statement = null;
@@ -25,20 +24,26 @@ public class Groceries {
 
             System.out.println("Connection successfull....!");
 
-//            String insert = "insert into teacher_info values(0,'Chandan','Male',47)";
-
             statement = connection.createStatement();
 
-            String query = "select * from teacher_info";
+            String query = "select * from teacher_info where id=7";
 
             ResultSet resultSet = statement.executeQuery(query);
 
-            resultSet.next();
+            while (resultSet.next()) {
 
-            System.out.println("id : " + resultSet.getInt(1) + " ; Teacher Name : " + resultSet.getString(2) + " ; Gender : " + resultSet.getString(3) + " ; age : " + resultSet.getInt(4));
-        } catch (ClassNotFoundException | SQLException exception) {
+                int id = resultSet.getInt(1);
+                String teacherName = resultSet.getString(2);
+                String gender = resultSet.getString(3);
+                int age = resultSet.getInt(4);
 
-            System.out.println("Jdbc not found : " + exception.getMessage());
+                System.out.println("id : " + id + " ; Teacher Name : " + teacherName + " ; Gender : " + gender + " ; Age : " + age);
+            }
+
+
+        } catch (ClassNotFoundException | SQLException e) {
+
+            System.out.println(e.getMessage());
         } finally {
             try {
                 if (connection != null) {
@@ -49,8 +54,7 @@ public class Groceries {
                     connection.close();
                 }
             } catch (SQLException e) {
-
-                System.out.println(e.getMessage());
+                throw new RuntimeException(e);
             }
         }
     }

@@ -1,8 +1,7 @@
-package com.xworkz.blinkit.jdbc.runner;
+package com.xworkz.jdbc.runner;
 
 import java.sql.*;
-
-public class Chicken {
+public class Playground {
 
     public static void main(String[] args) {
 
@@ -54,9 +53,10 @@ public class Chicken {
                 if(statement!=null) {
                     connection.close();
                 }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
-}
+

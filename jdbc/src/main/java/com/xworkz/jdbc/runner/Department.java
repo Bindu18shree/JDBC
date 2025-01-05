@@ -7,6 +7,7 @@ public class Department {
     public static void main(String[] args) {
 
         Connection connection = null;
+        Statement statement = null;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -23,20 +24,32 @@ public class Department {
 
             System.out.println("Connection successfull....!");
 
-            String insert = "insert into teacher_info values(0,'Chandan','Male',47)";
+//            String insert = "insert into teacher_info values(0,'Chandan','Male',47)";
 
-            Statement statement = connection.createStatement();
+             statement = connection.createStatement();
 
-            int row = statement.executeUpdate(insert);
+            String query = "select * from teacher_info";
 
-            System.out.println("no of rows inserted : " +row);
+           ResultSet resultSet =  statement.executeQuery(query);
+
+           resultSet.next();
+
+//            int row = statement.executeUpdate(insert);
+
+            System.out.println("id : " +resultSet.getInt(1)+" ; Teacher Name : "+resultSet.getString(2)+" ; Gender : "+resultSet.getString(3)+" ; age : "+resultSet.getInt(4));
         }
         catch (ClassNotFoundException | SQLException exception){
 
             System.out.println("Jdbc not found : " +exception.getMessage());
         } finally {
             try {
-                connection.close();
+                if (connection!=null) {
+                    connection.close();
+                }
+
+                if(statement!=null){
+                    connection.close();
+                }
             } catch (SQLException e) {
 
                 System.out.println(e.getMessage());
